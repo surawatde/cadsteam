@@ -1,11 +1,17 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import createMiddleware from "next-intl/middleware";
 
-const protectedRoutes = ["/dashboard"];
+import { routing } from "./src/i18n/routing";
+
+const intlMiddleware = createMiddleware(routing);
+
+const protectedRoutes = ["/dashboard", "/admin"];
 const authRoutes = ["/login", "/register"];
+const adminRoutes = ["/admin"];
 
 export async function middleware(request: NextRequest) {
-  const response = NextResponse.next({ request });
+  const response = intlMiddleware(request);
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -47,11 +53,21 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isProtected = protectedRoutes.some((p) => pathname.startsWith(p));
   const isAuthRoute = authRoutes.some((p) => pathname.startsWith(p));
+  const isAdminRoute = adminRoutes.some((p) => pathname.startsWith(p));
 
   if (isProtected && !user) {
     const loginUrl = request.nextUrl.clone();
     loginUrl.pathname = "/login";
     return NextResponse.redirect(loginUrl);
+  }
+
+  if (isAdminRoute && user) {
+    const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+    if (!adminEmail || user.email?.toLowerCase() !== adminEmail.toLowerCase()) {
+      const dashboardUrl = request.nextUrl.clone();
+      dashboardUrl.pathname = "/dashboard";
+      return NextResponse.redirect(dashboardUrl);
+    }
   }
 
   if (isAuthRoute && user) {
@@ -64,5 +80,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/login", "/register"],
+  matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
 };

@@ -1,4 +1,12 @@
-export type ProductCategory = "Inspection" | "Reverse Engineering" | "Post-Processor";
+export type ProductCategory =
+  | "Inspection"
+  | "Reverse Engineering"
+  | "Post-Processor"
+  | "CAD";
+
+export type PricingType = "free" | "paid";
+
+export type DeploymentType = "offline" | "web";
 
 export type ProductRow = {
   id: string;
@@ -6,6 +14,9 @@ export type ProductRow = {
   category: ProductCategory;
   price: string;
   image_url: string | null;
+  description?: string | null;
+  pricing_type?: PricingType | null;
+  deployment_type?: DeploymentType | null;
 };
 
 export type LicenseStatus = "active" | "expired" | "revoked";

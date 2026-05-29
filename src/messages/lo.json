@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "exploreTools": "Explore Tools",
+    "dashboard": "Dashboard",
+    "myLibrary": "My Library",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "menu": "Menu"
+  },
+  "home": {
+    "badge": "V 1.0 BETA",
+    "headline": "Engineering Software Hub.",
+    "subheadline": "Professional tools with flexible deployment. Run local-first or seamlessly in your web browser.",
+    "primaryCta": "Explore Tools",
+    "secondaryCta": "My Library",
+    "feature1Title": "Flexible Access",
+    "feature1Body": "Secure 30-day offline tokens or zero-install web access.",
+    "feature2Title": "Pro Tools",
+    "feature2Body": "Premium Inspection, Reverse Engineering, and Post-processors.",
+    "feature3Title": "Smart Dashboard",
+    "feature3Body": "Manage your licenses and track token status in one place."
+  },
+  "products": {
+    "header": "Engineering Tools",
+    "subheader": "Specialized solutions for precision manufacturing and design."
+  }
+}
+

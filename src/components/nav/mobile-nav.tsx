@@ -15,7 +15,25 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 
-export function MobileNav({ isAuthed }: { isAuthed: boolean }) {
+type Labels = {
+  exploreTools: string;
+  dashboard: string;
+  myLibrary: string;
+  login: string;
+  register: string;
+  logout: string;
+  menu: string;
+};
+
+export function MobileNav({
+  isAuthed,
+  isAdmin,
+  labels,
+}: {
+  isAuthed: boolean;
+  isAdmin: boolean;
+  labels: Labels;
+}) {
   return (
     <Sheet>
       <SheetTrigger
@@ -32,22 +50,34 @@ export function MobileNav({ isAuthed }: { isAuthed: boolean }) {
         className="border-white/20 bg-white/75 backdrop-blur-xl dark:border-white/10 dark:bg-[#0B132B]/75"
       >
         <SheetHeader className="px-6 pt-6">
-          <SheetTitle>Menu</SheetTitle>
+          <SheetTitle>{labels.menu}</SheetTitle>
         </SheetHeader>
 
         <div className="px-6 pb-6">
           <div className="mt-2 grid gap-2">
             <ButtonLink href="/products" variant="ghost" size="lg" className="justify-start">
-              Explore Tools
+              {labels.exploreTools}
             </ButtonLink>
 
             {isAuthed ? (
-              <ButtonLink href="/dashboard" variant="ghost" size="lg" className="justify-start">
-                Dashboard
-              </ButtonLink>
+              <>
+                <ButtonLink href="/dashboard" variant="ghost" size="lg" className="justify-start">
+                  {labels.dashboard}
+                </ButtonLink>
+                {isAdmin ? (
+                  <ButtonLink
+                    href="/admin/products"
+                    variant="ghost"
+                    size="lg"
+                    className="justify-start"
+                  >
+                    Admin
+                  </ButtonLink>
+                ) : null}
+              </>
             ) : (
               <ButtonLink href="/login" variant="ghost" size="lg" className="justify-start">
-                My Library
+                {labels.myLibrary}
               </ButtonLink>
             )}
           </div>
@@ -62,16 +92,16 @@ export function MobileNav({ isAuthed }: { isAuthed: boolean }) {
                     "w-full justify-start"
                   )}
                 >
-                  Logout
+                  {labels.logout}
                 </button>
               </form>
             ) : (
               <div className="grid gap-2">
                 <ButtonLink href="/login" variant="outline" size="lg" className="justify-start">
-                  Login
+                  {labels.login}
                 </ButtonLink>
                 <ButtonLink href="/register" variant="ghost" size="lg" className="justify-start">
-                  Register
+                  {labels.register}
                 </ButtonLink>
               </div>
             )}
@@ -87,4 +117,3 @@ export function MobileNav({ isAuthed }: { isAuthed: boolean }) {
     </Sheet>
   );
 }
-

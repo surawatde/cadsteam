@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 import { logoutAction } from "@/app/actions/auth";
@@ -7,6 +6,7 @@ import { LanguageSwitcher } from "@/components/nav/language-switcher";
 import { MobileNav } from "@/components/nav/mobile-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { buttonVariants } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { createSupabaseServerClient } from "@/utils/supabase/server";
 

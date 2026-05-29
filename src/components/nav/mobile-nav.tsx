@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { MenuIcon } from "lucide-react";
 
 import { logoutAction } from "@/app/actions/auth";
@@ -13,6 +12,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 type Labels = {

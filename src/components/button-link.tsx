@@ -1,7 +1,7 @@
-import Link, { type LinkProps } from "next/link";
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import type { VariantProps } from "class-variance-authority";
 
+import { Link } from "@/i18n/navigation";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -11,7 +11,7 @@ export function ButtonLink({
   variant,
   children,
   ...props
-}: LinkProps &
+}: ComponentProps<typeof Link> &
   VariantProps<typeof buttonVariants> & { className?: string; children: ReactNode }) {
   return (
     <Link
